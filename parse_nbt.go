@@ -47,10 +47,10 @@ func ParseCompressedStream(compressedReader io.Reader, compression byte) (compou
 func Parse(reader io.Reader) (compound TAG_Compound, fail bool) {
 	var realreader io.Reader = reader
 
-	var tagid [512]byte
+	var tagid [1]byte
 	var err error
 	var n int
-	n, err = realreader.Read(tagid[0:1])
+	n, err = realreader.Read(tagid[:])
 	var length uint16
 	var tmp *uint16 = &length
 	binary.Read(realreader, binary.BigEndian, tmp)

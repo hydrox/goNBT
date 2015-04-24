@@ -69,9 +69,7 @@ func toString(value interface{}, prefix int) string {
 }
 
 func ReadInt64(reader *io.Reader) (result int64) {
-	var realreader io.Reader = *reader
-	tmp := make([]byte, 8)
-	realreader.Read(tmp)
+	tmp := ReadByteArray(reader, 8)
 	for i := 0; i < 8; i++ {
 		result |= int64(tmp[i]) << (8 * uint(7-i))
 	}
@@ -79,9 +77,7 @@ func ReadInt64(reader *io.Reader) (result int64) {
 }
 
 func ReadInt32(reader *io.Reader) (result int32) {
-	var realreader io.Reader = *reader
-	tmp := make([]byte, 4)
-	realreader.Read(tmp)
+	tmp := ReadByteArray(reader, 4)
 	for i := 0; i < 4; i++ {
 		result |= int32(tmp[i]) << (8 * uint(3-i))
 	}
@@ -89,9 +85,7 @@ func ReadInt32(reader *io.Reader) (result int32) {
 }
 
 func ReadInt16(reader *io.Reader) (result int16) {
-	var realreader io.Reader = *reader
-	tmp := make([]byte, 2)
-	realreader.Read(tmp)
+	tmp := ReadByteArray(reader, 2)
 	for i := 0; i < 2; i++ {
 		result |= int16(tmp[i]) << (8 * uint(1-i))
 	}
